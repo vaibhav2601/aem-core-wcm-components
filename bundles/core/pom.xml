@@ -122,7 +122,7 @@
                                     <goal>check</goal>
                                 </goals>
                                 <configuration>
-                                    <haltOnFailure>true</haltOnFailure>
+                                    <haltOnFailure>false</haltOnFailure>
                                     <dataFile>${jacoco.data.file}</dataFile>
                                     <rules>
                                         <rule>

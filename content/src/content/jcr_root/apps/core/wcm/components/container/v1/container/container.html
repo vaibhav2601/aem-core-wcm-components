@@ -1,0 +1,8 @@
+<div data-sly-use.container="com.adobe.cq.wcm.core.components.models.GenericContainer"
+     data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+     class="cmp-container">
+    <div>
+        <sly data-sly-resource="${'grid' @ resourceType='wcm/foundation/components/responsivegrid'}"/>
+    </div>
+</div>
+<sly data-sly-call="${template.placeholder @ isEmpty=!text, classAppend='cmp-title'}"></sly>

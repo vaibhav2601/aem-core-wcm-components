@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" jcr:primaryType="nt:unstructured">
+    <component jcr:primaryType="nt:unstructured"
+               sling:resourceType="core/wcm/components/showcase/component">
+    </component>
+    <info jcr:primaryType="nt:unstructured"
+          sling:resourceType="core/wcm/components/tabs/v1/tabs">
+        <code jcr:primaryType="nt:unstructured"
+                cq:panelTitle="Code"
+                sling:resourceType="core/wcm/components/showcase/code"
+                reference="../../component"/>
+        <properties jcr:primaryType="nt:unstructured"
+                cq:panelTitle="Properties"
+                sling:resourceType="core/wcm/components/showcase/properties"
+                reference="../../component"/>
+    </info>
+</jcr:root>

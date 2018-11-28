@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-/*global PR*/
+/*global PR, html_beautify */
 (function(PR) {
     "use strict";
 
@@ -25,7 +25,7 @@
     }
     $(document).ready(function() {
         $("pre.cmp-code code").each(function(i, block) {
-            block.innerHTML = escapeHtml(block.innerHTML);
+            block.innerHTML = escapeHtml(html_beautify(block.innerHTML, { "preserve_newlines": false }));
         });
         PR.prettyPrint();
     });

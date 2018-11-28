@@ -17,4 +17,5 @@
 #base=js
 
 prettify.js
+beautify.js
 code.js

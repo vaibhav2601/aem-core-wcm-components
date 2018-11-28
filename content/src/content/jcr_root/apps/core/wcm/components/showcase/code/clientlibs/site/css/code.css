@@ -22,7 +22,7 @@ li.L5, li.L6, li.L7, li.L8 {
     white-space: pre-wrap !important;
 }
 
-.tabs .cmp-tabs__tabpanel {
+.info .cmp-tabs__tabpanel {
     height: 25em;
     overflow: auto;
 }

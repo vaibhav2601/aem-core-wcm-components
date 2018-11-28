@@ -67,7 +67,8 @@
                         <properties
                             cq:panelTitle="Properties"
                             jcr:primaryType="nt:unstructured"
-                            sling:resourceType="core/wcm/components/showcase/properties"/>
+                            sling:resourceType="core/wcm/components/showcase/properties"
+                            reference="../../component"/>
                     </info>
                 </showcase>
             </responsivegrid>

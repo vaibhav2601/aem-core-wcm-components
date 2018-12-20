@@ -16,5 +16,7 @@
 
 <div data-sly-use.container="com.adobe.cq.wcm.core.components.models.GenericContainer"
      data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
-     class="cmp-container" style="${container.styleString @ context = 'attribute'}">
+     class="cmp-container" background="${container.backgroundImageSrc}">
+    <sly data-sly-resource="${resource.path @ resourceType='wcm/foundation/components/parsys/newpar', appendPath='/*', decorationTagName='div', cssClassName='new section aem-Grid-newComponent'}"
+         data-sly-test="${(wcmmode.edit || wcmmode.preview)}"></sly>
 </div>

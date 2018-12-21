@@ -17,6 +17,7 @@
 package com.adobe.cq.wcm.core.components.models;
 
 import com.day.text.StringAbbreviator;
+import org.apache.sling.api.resource.Resource;
 import org.osgi.annotation.versioning.ConsumerType;
 
 /**
@@ -30,5 +31,9 @@ public interface GenericContainer extends Container {
     default String getBackgroundType() { throw new UnsupportedOperationException(); }
 
     default String getBackgroundColor() { throw new UnsupportedOperationException();
+    }
+
+    default Resource getImageResource() {
+        throw new UnsupportedOperationException();
     }
 }

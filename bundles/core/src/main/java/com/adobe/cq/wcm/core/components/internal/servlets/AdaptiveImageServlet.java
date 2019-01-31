@@ -59,6 +59,7 @@ import com.day.cq.dam.api.DamConstants;
 import com.day.cq.dam.api.Rendition;
 import com.day.cq.dam.api.handler.AssetHandler;
 import com.day.cq.dam.api.handler.store.AssetStore;
+import com.day.cq.dam.commons.util.PrefixRenditionPicker;
 import com.day.cq.wcm.api.NameConstants;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
@@ -325,11 +326,17 @@ public class AdaptiveImageServlet extends SlingSafeMethodsServlet {
         Rectangle rectangle = getCropRect(componentProperties);
         boolean flipHorizontally = componentProperties.get(Image.PN_FLIP_HORIZONTAL, Boolean.FALSE);
         boolean flipVertically = componentProperties.get(Image.PN_FLIP_VERTICAL, Boolean.FALSE);
+        
+       Rendition  renditionInPlaceOfOrig= new PrefixRenditionPicker(DamConstants.PREFIX_ASSET_WEB)
+				.getRendition(asset.getRenditions().iterator());
+        
+        AssetHandler assetHandler = assetStore.getAssetHandler(imageType);
+        Layer	layer = new Layer(assetHandler.getImage(renditionInPlaceOfOrig));
+		int originalWidth = layer.getWidth();
+        int originalHeight = layer.getHeight();
         if (rotationAngle != 0 || rectangle != null || resizeWidth > 0 || flipHorizontally || flipVertically) {
-            int originalWidth = getDimension(asset.getMetadataValue(DamConstants.TIFF_IMAGEWIDTH));
-            int originalHeight = getDimension(asset.getMetadataValue(DamConstants.TIFF_IMAGELENGTH));
-            AssetHandler assetHandler = assetStore.getAssetHandler(imageType);
-            Layer layer = null;
+            
+           
             boolean appliedTransformation = false;
             if (rectangle != null) {
                 double scaling;
@@ -365,25 +372,25 @@ public class AdaptiveImageServlet extends SlingSafeMethodsServlet {
                 appliedTransformation = true;
             }
             if (rotationAngle != 0) {
-                if (layer == null) {
+                /*if (layer == null) {
                     layer = new Layer(assetHandler.getImage(asset.getOriginal()));
-                }
+                }*/
                 layer.rotate(rotationAngle);
                 LOGGER.debug("Applied rotation transformation ({} degrees).", rotationAngle);
                 appliedTransformation = true;
             }
             if (flipHorizontally) {
-                if (layer == null) {
+               /* if (layer == null) {
                     layer = new Layer(assetHandler.getImage(asset.getOriginal()));
-                }
+                }*/
                 layer.flipHorizontally();
                 LOGGER.debug("Flipped image horizontally.");
                 appliedTransformation = true;
             }
             if (flipVertically) {
-                if (layer == null) {
+               /* if (layer == null) {
                     layer = new Layer(assetHandler.getImage(asset.getOriginal()));
-                }
+                }*/
                 layer.flipVertically();
                 LOGGER.debug("Flipped image vertically.");
                 appliedTransformation = true;
@@ -406,7 +413,7 @@ public class AdaptiveImageServlet extends SlingSafeMethodsServlet {
                     } else {
                         LOGGER.debug("Rendering the original asset {} since its width ({}px) is either smaller than the requested " +
                                 "width ({}px) or since no resize is needed.", asset.getPath(), originalWidth, resizeWidth);
-                        stream(response, asset.getOriginal().getStream(), imageType, imageName);
+                        stream(response, renditionInPlaceOfOrig.getStream(), imageType, imageName);
                     }
                 }
             } else {
@@ -414,7 +421,7 @@ public class AdaptiveImageServlet extends SlingSafeMethodsServlet {
             }
         } else {
             LOGGER.debug("No need to perform any processing on asset {}; rendering.", asset.getPath());
-            stream(response, asset.getOriginal().getStream(), imageType, imageName);
+            stream(response, renditionInPlaceOfOrig.getStream(), imageType, imageName);
         }
     }
 
